@@ -1,4 +1,4 @@
-IDI_ICON1               ICON    DISCARDABLE     "../windows/abuledu-minitexte.ico"
+IDI_ICON1               ICON    DISCARDABLE     "../windows/abuledu-microtexte.ico"
 
 #include <windows.h>
 #include "../src/version.h"

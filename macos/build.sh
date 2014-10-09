@@ -2,8 +2,8 @@
 #script de creation de l'image pour OSX
 #Eric Seigne 2011-2012 <eric.seigne@ryxeo.com>
 #documentation https://redmine.ryxeo.com/projects/ryxeo/wiki/Cr%C3%A9er_un_paquet_avec_OSX
-APPNAME="abuledu-minitexte"
-VOLICON="macos/icones/abuledu-minitexte.icns"
+APPNAME="abuledu-microtexte"
+VOLICON="macos/icones/abuledu-microtexte.icns"
 #recupere la version dans le fichier version.h
 if [ -f version.h ]; then
     LAVERSIONH=`grep VER_FILEVERSION_STR version.h | awk '{print $3}' | cut -d "\\\\" -f1 | tr -d '"'`
@@ -13,7 +13,7 @@ if [ -f version.h ]; then
 else 
     APPVERSION=${1}
 fi
-VOLNAME="AbulEdu MiniTexte ${APPVERSION}"
+VOLNAME="AbulEdu MicroTexte ${APPVERSION}"
 
 #On stoppe dès qu'on rencontre un problème
 set -e
