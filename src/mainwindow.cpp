@@ -674,9 +674,15 @@ void MainWindow::on_abeMenuFeuilleBtnQuit_clicked()
 
 void MainWindow::on_stackedWidget_currentChanged(int arg1)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << arg1;
+    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << "page courante : "<< arg1 << ui->stackedWidget->widget(arg1)->objectName();
 
-    if (m_localDebug) qDebug()<<"page courante : "<<ui->stackedWidget->widget(arg1)->objectName();
+    /* #3932 Barre d'outils cachée lorsqu'on est pas sur la pageTexte */
+    if(ui->stackedWidget->widget(arg1)->objectName() != "pageTexte") {
+        ui->frTopMicroTexte->setVisible(false);
+    }
+    else{
+        ui->frTopMicroTexte->setVisible(true);
+    }
 }
 
 void MainWindow::slotClearCurrent()
