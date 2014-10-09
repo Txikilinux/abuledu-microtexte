@@ -5,9 +5,10 @@ include /usr/share/cdbs/1/class/qmake.mk
 
 QMAKE=qmake
 QTDIR=/usr
+QTPLUGINS=/usr/lib/qt4/plugins
 CFLAGS=-O3
 CXXFLAGS=-O3
-EXECNAME=abuledu-minitexte
+EXECNAME=abuledu-microtexte
 DEST=/usr/share/$(EXECNAME)
 EXECDEST=/usr/lib/$(EXECNAME)
 BUILDTEMP=$(CURDIR)/debian/$(EXECNAME)

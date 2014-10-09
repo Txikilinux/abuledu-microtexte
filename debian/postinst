@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APPNAME=abuledu-minitexte
+APPNAME=abuledu-microtexte
 
 ICON=/usr/share/applications/${APPNAME}.desktop
 ALACARTEDIR=/usr/share/abuledu-alacarte/data/profile1.applications/
