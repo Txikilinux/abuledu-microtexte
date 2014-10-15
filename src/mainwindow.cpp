@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_isCloseRequested  = false;
     m_isNewFile         = true;
     m_wantNewFile       = false;
+    m_wantOpenFile      = false;
     setWindowFlags(Qt::CustomizeWindowHint);
 
 #ifdef Q_OS_WIN
@@ -76,12 +77,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->abeBoxFileManager, SIGNAL(signalAbeFileSaved(AbulEduBoxFileManagerV1::enumAbulEduBoxFileManagerSavingLocation,QString,bool)),
             this, SLOT(slotAbeFileSaved(AbulEduBoxFileManagerV1::enumAbulEduBoxFileManagerSavingLocation,QString,bool)), Qt::UniqueConnection);
     connect(ui->abeBoxFileManager, SIGNAL(signalAbeFileCloseOrHide()),this, SLOT(showTextPage()), Qt::UniqueConnection);
+    connect(ui->abeBoxFileManager, SIGNAL(signalAbeFileSelected(QSharedPointer<AbulEduFileV1>)), this, SLOT(showTextPage()), Qt::UniqueConnection);
 
     /***************************** MenuFeuille ***************************************/
     connect(ui->frmMenuFeuille, SIGNAL(signalAbeMenuFeuilleChangeLanguage(QString)),this,SLOT(slotChangeLangue(QString)),Qt::UniqueConnection);
 
 
-    //    connect(ui->teZoneTexte->document(), SIGNAL(modificationChanged(bool)), this, SLOT(setWindowModified(bool)), Qt::UniqueConnection);
+        connect(ui->teZoneTexte->document(), SIGNAL(modificationChanged(bool)), this, SLOT(setWindowModified(bool)), Qt::UniqueConnection);
     //    /* On émet un signal inquant si le texte a été modifié */
     //    connect(ui->teZoneTexte->document(), SIGNAL(modificationChanged(bool)), this, SIGNAL(somethingHasChangedInText(bool)), Qt::UniqueConnection);
 
@@ -155,16 +157,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btnPrintMicroTexte, SIGNAL(clicked()), SLOT(on_abeMenuFeuilleBtnPrint_clicked()), Qt::UniqueConnection);
     connect(ui->btnHelpMicroTexte, SIGNAL(clicked()), SLOT(on_abeMenuFeuilleBtnHelp_clicked()), Qt::UniqueConnection);
 
-    connect(ui->btnQuitMicroTexte, SIGNAL(clicked()), abeApp, SLOT(quit()), Qt::UniqueConnection);
+    connect(ui->btnQuitMicroTexte, SIGNAL(clicked()), SLOT(on_abeMenuFeuilleBtnQuit_clicked()), Qt::UniqueConnection);
 
     /* Caps par defaut */
     ui->btnMajusculeMicroTexte->click();
 
+    setWindowModified(false);
 }
 
 void MainWindow::centrerFenetre()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     QDesktopWidget *widget = QApplication::desktop();
     int desktop_width  = widget->screen(widget->screenNumber(this))->width();
@@ -174,7 +177,7 @@ void MainWindow::centrerFenetre()
 
 void MainWindow::initMultimedia()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_multimedia = new AbulEduMultiMediaV1(AbulEduMultiMediaV1::Sound, ui->frmControlAudio);
     m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioSetDirection(QBoxLayout::TopToBottom);
@@ -193,7 +196,7 @@ void MainWindow::initMultimedia()
 
 void MainWindow::initSignalMapperFontChange()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_signalMapperFontChange = new QSignalMapper(this);
     connect(m_signalMapperFontChange, SIGNAL(mapped(QString)), SLOT(slotChangeFont(QString)), Qt::UniqueConnection);
@@ -208,7 +211,7 @@ void MainWindow::initSignalMapperFontChange()
 
 void MainWindow::initSignalMapperFormFontChange()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_signalMapperFontFormChange = new QSignalMapper(this);
     connect(m_signalMapperFontFormChange, SIGNAL(mapped(QString)), SLOT(slotChangeFormFont(QString)), Qt::UniqueConnection);
@@ -223,7 +226,7 @@ void MainWindow::initSignalMapperFormFontChange()
 
 void MainWindow::initSignalMapperTextAlignChange()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_signalMapperTextAlignChange = new QSignalMapper(this);
     connect(m_signalMapperTextAlignChange, SIGNAL(mapped(QString)), SLOT(slotChangeTextAlign(QString)), Qt::UniqueConnection);
@@ -240,7 +243,7 @@ void MainWindow::initSignalMapperTextAlignChange()
 
 void MainWindow::initComboBoxColor(QComboBox *cb)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
     if(!cb) return;
 
 //    const QStringList colorNames = QColor::colorNames();
@@ -290,7 +293,7 @@ void MainWindow::initTooltips()
 
 void MainWindow::installTranslator()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_locale = QLocale::system().name().section('_', 0, 0);
     myappTranslator.load("abuledu-minitexte_"+m_locale, "./lang");
@@ -302,7 +305,7 @@ void MainWindow::installTranslator()
 
 MainWindow::~MainWindow()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     delete ui;
     m_abuledufile->abeClean();
@@ -310,14 +313,14 @@ MainWindow::~MainWindow()
 
 QTextDocument *MainWindow::abeTexteGetDocument()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     return ui->teZoneTexte->document();
 }
 
 bool MainWindow::fileSave()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     setCurrentFileName(m_abuledufile->abeFileGetDirectoryTemp().absolutePath() + "/document.html");
 
@@ -355,7 +358,7 @@ bool MainWindow::fileSave()
 
 bool MainWindow::fileSaveAs()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_isNewFile = false;
     return fileSave();
@@ -363,7 +366,7 @@ bool MainWindow::fileSaveAs()
 
 void MainWindow::setCurrentFileName(const QString &fileName)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_fileName = fileName;
     /* Comme le nom vient de changer, c'est que le fichier vient d'être crée ou vient d'être sauvegardé */
@@ -390,7 +393,7 @@ void MainWindow::setCurrentFileName(const QString &fileName)
 
 bool MainWindow::abeTexteInsertImage(const QString &cheminImage, qreal width, qreal height, const QTextFrameFormat::Position &position, QString name)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     QFile fichier(cheminImage);
     if(!fichier.exists()){
@@ -427,7 +430,7 @@ bool MainWindow::abeTexteInsertImage(const QString &cheminImage, qreal width, qr
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     if(!isWindowModified() || (m_isNewFile && ui->teZoneTexte->toPlainText().isEmpty())){
         e->accept();
@@ -448,7 +451,7 @@ void MainWindow::closeEvent(QCloseEvent *e)
 #ifndef QT_NO_PRINTER
 void MainWindow::filePrint(QPrinter *printer)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     /* On imprime */
     ui->teZoneTexte->print(printer);
@@ -463,7 +466,7 @@ void MainWindow::filePrint(QPrinter *printer)
 
 void MainWindow::slotCursorMoved()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     /* Répercussions graphiques de l'alignement */
     if(ui->teZoneTexte->alignment().testFlag(Qt::AlignLeft)){
@@ -486,7 +489,7 @@ void MainWindow::slotCursorMoved()
 
 void MainWindow::slotMediathequeDownload(QSharedPointer<AbulEduFileV1> abeFile, int code)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     Q_UNUSED(code)
     QString file = abeFile->abeFileGetContent(0).absoluteFilePath();
@@ -539,7 +542,7 @@ void MainWindow::slotMediathequeDownload(QSharedPointer<AbulEduFileV1> abeFile, 
 
 void MainWindow::fileOpen()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     ui->abeBoxFileManager->abeSetOpenOrSaveEnum(AbulEduBoxFileManagerV1::abeOpen);
     ui->abeBoxFileManager->abeRefresh(AbulEduBoxFileManagerV1::abePC);
@@ -549,7 +552,7 @@ void MainWindow::fileOpen()
 
 void MainWindow::slotOpenFile(QSharedPointer<AbulEduFileV1> abeFile)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__  << abeFile;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__  << abeFile;
 
     /* Correction du bug de non apparition de l'image */
     if(abeFile)
@@ -594,11 +597,12 @@ void MainWindow::slotOpenFile(QSharedPointer<AbulEduFileV1> abeFile)
         }
     }
     ui->teZoneTexte->update();
+    setWindowModified(false);
 }
 
 void MainWindow::slotAbeFileSaved(AbulEduBoxFileManagerV1::enumAbulEduBoxFileManagerSavingLocation location, QString fileName, bool success)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << fileName << " et " << success;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << fileName << " et " << success;
 
     QString emplacement;
     switch (location) {
@@ -630,6 +634,9 @@ void MainWindow::slotAbeFileSaved(AbulEduBoxFileManagerV1::enumAbulEduBoxFileMan
         message = trUtf8("Votre fichier n'a pas pu être enregistré...");
     }
     AbulEduMessageBoxV1* msgEnregistrement = new AbulEduMessageBoxV1(trUtf8("Enregistrement"), message,true,ui->pageBoxFileManager);
+    if(!m_wantOpenFile){
+        connect(msgEnregistrement, SIGNAL(signalAbeMessageBoxCloseOrHide()), this, SLOT(showTextPage()), Qt::UniqueConnection);
+    }
     if(success)
     {
         msgEnregistrement->setWink();
@@ -639,16 +646,19 @@ void MainWindow::slotAbeFileSaved(AbulEduBoxFileManagerV1::enumAbulEduBoxFileMan
         connect(msgEnregistrement,SIGNAL(signalAbeMessageBoxCloseOrHide()),this,SLOT(deleteLater()),Qt::UniqueConnection);
     }
     msgEnregistrement->show();
-    ui->stackedWidget->setCurrentWidget(ui->pageTexte);
     if(m_wantNewFile){
         slotClearCurrent();
         m_wantNewFile = false;
+    }
+    if(m_wantOpenFile){
+        fileOpen();
+        m_wantOpenFile = false;
     }
 }
 
 void MainWindow::on_abeMenuFeuilleBtnPrint_clicked()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
 #ifndef QT_NO_PRINTER
     if(!m_printDialog->isVisible()){
@@ -660,21 +670,21 @@ void MainWindow::on_abeMenuFeuilleBtnPrint_clicked()
 
 void MainWindow::on_abeMenuFeuilleBtnHelp_clicked()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     ui->stackedWidget->setCurrentWidget(ui->pageAbout);
 }
 
 void MainWindow::on_abeMenuFeuilleBtnQuit_clicked()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     close();
 }
 
 void MainWindow::on_stackedWidget_currentChanged(int arg1)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << "page courante : "<< arg1 << ui->stackedWidget->widget(arg1)->objectName();
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << "page courante : "<< arg1 << ui->stackedWidget->widget(arg1)->objectName();
 
     /* #3932 Barre d'outils cachée lorsqu'on est pas sur la pageTexte */
     if(ui->stackedWidget->widget(arg1)->objectName() != "pageTexte") {
@@ -687,24 +697,35 @@ void MainWindow::on_stackedWidget_currentChanged(int arg1)
 
 void MainWindow::slotClearCurrent()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     /* Je veux faire un nouveau texte, mais je ne veux pas changer d'abe */
-    m_abuledufile->abeCleanDirectory(m_abuledufile->abeFileGetDirectoryTemp().absolutePath(),m_abuledufile->abeFileGetDirectoryTemp().absolutePath());
+    m_abuledufile->abeCleanDirectoryRecursively(m_abuledufile->abeFileGetDirectoryTemp().absolutePath());
     ui->teZoneTexte->clear();
     setWindowModified(false);
 }
 
 void MainWindow::on_abeMenuFeuilleBtnOpen_clicked()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
-    fileOpen();
+    if(isWindowModified()){
+        m_wantOpenFile = true;
+        AbulEduMessageBoxV1* msg = new AbulEduMessageBoxV1(trUtf8("Ouvrir un projet"),trUtf8("Le projet actuel comporte des modifications non enregistrées. Voulez-vous sauvegarder ?"),true,ui->stackedWidget->currentWidget());
+        msg->abeSetModeEnum(AbulEduMessageBoxV1::abeYesNoCancelButton);
+        msg->show();
+        connect(msg,SIGNAL(signalAbeMessageBoxYES()),SLOT(on_abeMenuFeuilleBtnSave_clicked()),Qt::UniqueConnection);
+        connect(msg,SIGNAL(signalAbeMessageBoxNO()),SLOT(fileOpen()),Qt::UniqueConnection);
+    }
+    else{
+        fileOpen();
+    }
+    return;
 }
 
 void MainWindow::on_abeMenuFeuilleBtnSave_clicked()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     /* Je n'enregistre pas si la zone de texte est vide */
     if(ui->teZoneTexte->toPlainText().isEmpty()) return;
@@ -720,12 +741,15 @@ void MainWindow::on_abeMenuFeuilleBtnSave_clicked()
 
 void MainWindow::on_abeMenuFeuilleBtnNew_clicked()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     if(isWindowModified()){
         m_wantNewFile = true;
-        on_abeMenuFeuilleBtnSave_clicked();
-    }
+        AbulEduMessageBoxV1* msg = new AbulEduMessageBoxV1(trUtf8("Nouveau projet"),trUtf8("Le projet comporte des modifications non enregistrées. Voulez-vous sauvegarder ?"),true,ui->stackedWidget->currentWidget());
+        msg->abeSetModeEnum(AbulEduMessageBoxV1::abeYesNoCancelButton);
+        msg->show();
+        connect(msg,SIGNAL(signalAbeMessageBoxYES()),SLOT(on_abeMenuFeuilleBtnSave_clicked()),Qt::UniqueConnection);
+        connect(msg,SIGNAL(signalAbeMessageBoxNO()),SLOT(slotClearCurrent()),Qt::UniqueConnection);    }
     else{
         slotClearCurrent();
     }
@@ -734,7 +758,7 @@ void MainWindow::on_abeMenuFeuilleBtnNew_clicked()
 
 void MainWindow::showAbeMediathequeGet()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     ui->abeMediathequeGet->setVisible(true);
     ui->stackedWidget->setCurrentWidget(ui->pageMediathequeGet);
@@ -742,7 +766,7 @@ void MainWindow::showAbeMediathequeGet()
 
 void MainWindow::showTextPage()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     ui->stackedWidget->setCurrentWidget(ui->pageTexte);
     ui->frmFormat->setEnabled(true);
@@ -750,7 +774,7 @@ void MainWindow::showTextPage()
 
 void MainWindow::slotChangeLangue(const QString &lang)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << " en "<<lang;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << " en "<<lang;
 
      /* #3766 : le retranslateUi() efface tout le texte */
     const QString textToReplace = ui->teZoneTexte->document()->toHtml();
@@ -769,7 +793,7 @@ void MainWindow::slotChangeLangue(const QString &lang)
 
 void MainWindow::slotSessionAuthenticated(bool enable)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << enable;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << enable;
 
     if(enable)
         abeApp->getAbeNetworkAccessManager()->abeSSOLogin();
@@ -777,7 +801,7 @@ void MainWindow::slotSessionAuthenticated(bool enable)
 
 void MainWindow::slotReadContent()
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ ;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ ;
 
     (ui->teZoneTexte->textCursor().hasSelection()) ? (m_textToSpeech = ui->teZoneTexte->textCursor().selectedText()) : (m_textToSpeech = ui->teZoneTexte->toPlainText());
 
@@ -796,7 +820,7 @@ void MainWindow::slotReadContent()
  * ***********************************************************************************************************************************/
 void MainWindow::slotChangeFont(const QString &font)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << font << ui->teZoneTexte->textCursor().charFormat();
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << font << ui->teZoneTexte->textCursor().charFormat();
 
     m_textCharFormat.setFontFamily(font);
     m_textCharFormat.setFont(font);
@@ -813,7 +837,7 @@ void MainWindow::slotChangeFont(const QString &font)
 
 void MainWindow::slotChangeFormFont(const QString &form)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__  << form;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__  << form;
 
     /* On crée le format à appliquer */
     m_textCharFormat.setFontWeight(ui->btn_bold->isChecked() ? QFont::Bold : QFont::Normal);
@@ -825,7 +849,7 @@ void MainWindow::slotChangeFormFont(const QString &form)
 
 void MainWindow::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     QTextCursor cursor = ui->teZoneTexte->textCursor();
     //    if (cursor.hasSelection())
@@ -836,7 +860,7 @@ void MainWindow::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 
 void MainWindow::slotCurrentCharFormatChanged(QTextCharFormat tcf)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ /*<< tcf.fontFamily() << m_textCharFormat.fontFamily() << ui->teZoneTexte->currentFont()*/ ;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ /*<< tcf.fontFamily() << m_textCharFormat.fontFamily() << ui->teZoneTexte->currentFont()*/ ;
     /* Bouton bold */
     ui->btn_bold->setChecked((tcf.fontWeight() > 50));
     /* Bouton underlined */
@@ -884,7 +908,7 @@ void MainWindow::slotCurrentCharFormatChanged(QTextCharFormat tcf)
 
 void MainWindow::slotChangeTextAlign(const QString& align)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << align;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << align;
 
     if(align == "left"){
         ui->teZoneTexte->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
@@ -918,16 +942,15 @@ void MainWindow::slotFontLower()
 
 void MainWindow::on_teZoneTexte_textChanged()
 {
-    //    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ ;
-    //    if(!isWindowModified() && !ui->teZoneTexte->document()->isEmpty()) {
-    //        setWindowModified(true);
-    //    }
-
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ ;
+    if(!isWindowModified() && !ui->teZoneTexte->document()->isEmpty()) {
+        setWindowModified(true);
+    }
 }
 
 void MainWindow::slotChangeFontSize(int newSize)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << newSize ;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << newSize ;
     qreal pointSize = newSize;
     if(newSize > 0){
         QTextCharFormat fmt;
@@ -950,7 +973,7 @@ void MainWindow::on_btn_decrease_clicked()
 
 void MainWindow::slotChangeColor(int index)
 {
-    ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__ << "On change de couleur : " << index;
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << "On change de couleur : " << index;
     // const QStringList colorNames = QColor::colorNames();
     /* On change le fond */
    QColor color(m_listColors.at(index));
