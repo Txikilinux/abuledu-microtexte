@@ -651,11 +651,11 @@ void MainWindow::on_abeMenuFeuilleBtnPrint_clicked()
     ABULEDU_LOG_TRACE() << __PRETTY_FUNCTION__;
 
 #ifndef QT_NO_PRINTER
-    if(!m_printDialog->isVisible())
+    if(!m_printDialog->isVisible()){
         m_printDialog->showNormal();
-#endif
-
+    }
     ui->stackedWidget->setCurrentWidget(ui->pagePrint);
+#endif
 }
 
 void MainWindow::on_abeMenuFeuilleBtnHelp_clicked()

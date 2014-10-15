@@ -35,9 +35,13 @@
 #include <QTextCharFormat>
 #include <QColorDialog>
 #include <QTextDocumentWriter>
+
+#ifndef QT_NO_PRINTER
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPrinterInfo>
+#endif
+
 #include <QTextCursor>
 #include <QTextImageFormat>
 #include <QTextFrameFormat>
