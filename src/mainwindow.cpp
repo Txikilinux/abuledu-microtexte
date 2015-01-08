@@ -111,9 +111,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_printDialog = new QPrintDialog(m_printer, this);
     m_printDialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
     m_printDialog->setStyleSheet("background-color:#FFFFFF");
-    ui->glPrint->addWidget(m_printDialog);
-    connect(m_printDialog, SIGNAL(rejected()), this, SLOT(showTextPage()), Qt::UniqueConnection);
-    connect(m_printDialog, SIGNAL(accepted(QPrinter*)), this, SLOT(filePrint(QPrinter*)), Qt::UniqueConnection);
+    /* #4078 -> impossible d'integrer QPrintDialog dans un widget sous windows */
+    #ifndef Q_OS_WIN
+        ui->glPrint->addWidget(m_printDialog);
+        connect(m_printDialog, SIGNAL(rejected()), this, SLOT(showTextPage()), Qt::UniqueConnection);
+        connect(m_printDialog, SIGNAL(accepted(QPrinter*)), this, SLOT(filePrint(QPrinter*)), Qt::UniqueConnection);
+    #endif
 #endif
 #ifndef __ABULEDUTABLETTEV1__MODE__
     /* On Centre la fenetre */
@@ -664,6 +667,9 @@ void MainWindow::on_abeMenuFeuilleBtnPrint_clicked()
     if(!m_printDialog->isVisible()){
         m_printDialog->showNormal();
     }
+#endif
+#ifndef Q_OS_WIN32
+    /* #4078 -> impossible d'integrer QPrintDialog dans un widget sous windows */
     ui->stackedWidget->setCurrentWidget(ui->pagePrint);
 #endif
 }
