@@ -83,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->frmMenuFeuille, SIGNAL(signalAbeMenuFeuilleChangeLanguage(QString)),this,SLOT(slotChangeLangue(QString)),Qt::UniqueConnection);
 
 
-        connect(ui->teZoneTexte->document(), SIGNAL(modificationChanged(bool)), this, SLOT(setWindowModified(bool)), Qt::UniqueConnection);
+    connect(ui->teZoneTexte->document(), SIGNAL(modificationChanged(bool)), this, SLOT(setWindowModified(bool)), Qt::UniqueConnection);
     //    /* On émet un signal inquant si le texte a été modifié */
     //    connect(ui->teZoneTexte->document(), SIGNAL(modificationChanged(bool)), this, SIGNAL(somethingHasChangedInText(bool)), Qt::UniqueConnection);
 
@@ -99,10 +99,10 @@ MainWindow::MainWindow(QWidget *parent) :
     /***************************** Chargement des Fonts ***************************************/
     QFontDatabase fonts;
     if(!fonts.addApplicationFont(":/abuledutextev1/Ecolier")) {
-        qDebug() << "Erreur sur :/fonts/ECOLIER.TTF";
+        ABULEDU_LOG_DEBUG() << "Erreur sur :/fonts/ECOLIER.TTF";
     }
     if(!fonts.addApplicationFont(":/abuledutextev1/Cursive")) {
-        qDebug() << "Erreur sur :/fonts/CURSIVE.TTF";
+        ABULEDU_LOG_DEBUG() << "Erreur sur :/fonts/CURSIVE.TTF";
     }
 
 #ifndef QT_NO_PRINTER
@@ -112,11 +112,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_printDialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
     m_printDialog->setStyleSheet("background-color:#FFFFFF");
     /* #4078 -> impossible d'integrer QPrintDialog dans un widget sous windows */
-    #ifndef Q_OS_WIN
-        ui->glPrint->addWidget(m_printDialog);
-        connect(m_printDialog, SIGNAL(rejected()), this, SLOT(showTextPage()), Qt::UniqueConnection);
-        connect(m_printDialog, SIGNAL(accepted(QPrinter*)), this, SLOT(filePrint(QPrinter*)), Qt::UniqueConnection);
-    #endif
+#ifndef Q_OS_WIN
+    ui->glPrint->addWidget(m_printDialog);
+    connect(m_printDialog, SIGNAL(rejected()), this, SLOT(showTextPage()), Qt::UniqueConnection);
+    connect(m_printDialog, SIGNAL(accepted(QPrinter*)), this, SLOT(filePrint(QPrinter*)), Qt::UniqueConnection);
+#endif
 #endif
 #ifndef __ABULEDUTABLETTEV1__MODE__
     /* On Centre la fenetre */
@@ -205,7 +205,7 @@ void MainWindow::initSignalMapperFontChange()
     connect(m_signalMapperFontChange, SIGNAL(mapped(QString)), SLOT(slotChangeFont(QString)), Qt::UniqueConnection);
     m_signalMapperFontChange->setMapping(ui->btn_andika,  "Andika");
     m_signalMapperFontChange->setMapping(ui->btn_seyes,   "Ecolier_lignes");
-    m_signalMapperFontChange->setMapping(ui->btn_plume,   "CursiveStandard");
+    m_signalMapperFontChange->setMapping(ui->btn_plume,   "Cursive standard");
 
     connect(ui->btn_andika, SIGNAL(clicked()), m_signalMapperFontChange, SLOT(map()), Qt::UniqueConnection);
     connect(ui->btn_seyes, SIGNAL(clicked()), m_signalMapperFontChange, SLOT(map()), Qt::UniqueConnection);
@@ -249,18 +249,18 @@ void MainWindow::initComboBoxColor(QComboBox *cb)
     ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
     if(!cb) return;
 
-//    const QStringList colorNames = QColor::colorNames();
-//    int index = 0;
-//    foreach (const QString &colorName, colorNames) {
-//        const QColor color(colorName);
-//        cb->addItem(colorName, color);
-//        const QModelIndex idx = cb->model()->index(index++, 0);
-//        cb->model()->setData(idx, color, Qt::BackgroundColorRole);
-//    }
+    //    const QStringList colorNames = QColor::colorNames();
+    //    int index = 0;
+    //    foreach (const QString &colorName, colorNames) {
+    //        const QColor color(colorName);
+    //        cb->addItem(colorName, color);
+    //        const QModelIndex idx = cb->model()->index(index++, 0);
+    //        cb->model()->setData(idx, color, Qt::BackgroundColorRole);
+    //    }
 
     m_listColors << "black"<<  "white" << "darkGray" << "gray" <<  "lightGray" << "red"
-             << "green" << "blue" << "cyan" << "magenta" << "yellow" << "darkRed"
-             << "darkGreen" << "darkBlue" << "darkCyan" << "darkMagenta" ;
+                 << "green" << "blue" << "cyan" << "magenta" << "yellow" << "darkRed"
+                 << "darkGreen" << "darkBlue" << "darkCyan" << "darkMagenta" ;
 
     int index = 0;
     foreach (const QString &colorName, m_listColors) {
@@ -269,7 +269,7 @@ void MainWindow::initComboBoxColor(QComboBox *cb)
         const QModelIndex idx = cb->model()->index(index++, 0);
         cb->model()->setData(idx, color, Qt::BackgroundColorRole);
 
-        qDebug() << color;
+        ABULEDU_LOG_DEBUG() << color;
     }
 
     /* Par défaut, couleur noire */
@@ -327,7 +327,9 @@ bool MainWindow::fileSave()
 
     setCurrentFileName(m_abuledufile->abeFileGetDirectoryTemp().absolutePath() + "/document.html");
 
-    if (m_localDebug) qDebug() << "Ecriture dans le fichier " << m_fileName;
+    if (m_localDebug) {
+        ABULEDU_LOG_DEBUG() << "Ecriture dans le fichier " << m_fileName;
+    }
 
     QFileInfo fi(m_fileName);
 
@@ -400,7 +402,9 @@ bool MainWindow::abeTexteInsertImage(const QString &cheminImage, qreal width, qr
 
     QFile fichier(cheminImage);
     if(!fichier.exists()){
-        if (m_localDebug) qDebug()<<__PRETTY_FUNCTION__<<"ligne"<<__LINE__<<"Le fichier n'existe pas"<<cheminImage;
+        if (m_localDebug) {
+            ABULEDU_LOG_DEBUG()<<__PRETTY_FUNCTION__<<"ligne"<<__LINE__<<"Le fichier n'existe pas"<<cheminImage;
+        }
         return false;
     }
     else{
@@ -473,19 +477,19 @@ void MainWindow::slotCursorMoved()
 
     /* Répercussions graphiques de l'alignement */
     if(ui->teZoneTexte->alignment().testFlag(Qt::AlignLeft)){
-        qDebug() << "TEST GAUCHE OK";
+        //        ABULEDU_LOG_DEBUG() << "TEST GAUCHE OK";
         ui->btn_leftText->click();
     }
     else if(ui->teZoneTexte->alignment().testFlag(Qt::AlignHCenter)){
-        qDebug() << "TEST CENTER OK";
+        //        ABULEDU_LOG_DEBUG() << "TEST CENTER OK";
         ui->btn_centerText->click();
     }
     else if(ui->teZoneTexte->alignment().testFlag(Qt::AlignRight)){
-        qDebug() << "TEST RIGHT OK";
+        //        ABULEDU_LOG_DEBUG() << "TEST RIGHT OK";
         ui->btn_rightText->click();
     }
     else if(ui->teZoneTexte->alignment().testFlag(Qt::AlignJustify)){
-        qDebug() << "TEST JUSTIFY OK";
+        //        ABULEDU_LOG_DEBUG() << "TEST JUSTIFY OK";
         ui->btn_justifyText->click();
     }
 }
@@ -498,7 +502,9 @@ void MainWindow::slotMediathequeDownload(QSharedPointer<AbulEduFileV1> abeFile, 
     QString file = abeFile->abeFileGetContent(0).absoluteFilePath();
     QString filename = abeFile->abeFileGetContent(0).baseName() + ".png";
 
-    if (m_localDebug) qDebug() << "  slotMediathequeDownload : " << file << " et " << filename;
+    if (m_localDebug) {
+        ABULEDU_LOG_DEBUG() << "  slotMediathequeDownload : " << file << " et " << filename;
+    }
 
     QUrl Uri ( QString ( "mydata://data/%1" ).arg ( filename ) );
     QImage image = QImageReader ( file ).read().scaledToWidth(150,Qt::SmoothTransformation);
@@ -521,7 +527,9 @@ void MainWindow::slotMediathequeDownload(QSharedPointer<AbulEduFileV1> abeFile, 
     if(!image.save(imageDest)) {
         //        if (m_localDebug) qDebug() << "******* ERREUR de sauvegarde de " << imageDest;
     }
-    if (m_localDebug) qDebug() << "Sauvegarde de l'image dans " << imageDest;
+    if (m_localDebug) {
+        ABULEDU_LOG_DEBUG() << "Sauvegarde de l'image dans " << imageDest;
+    }
 
     imageFormat.setName(Uri.toString());
     cursor.insertImage(imageFormat);
@@ -563,9 +571,9 @@ void MainWindow::slotOpenFile(QSharedPointer<AbulEduFileV1> abeFile)
         m_abuledufile = abeFile;
     }
     if (m_localDebug) {
-        qDebug() << "Ouverture du fichier " << m_abuledufile->abeFileGetFileName().filePath();
-        qDebug()<<" dont le repertoire temporaire est "<<m_abuledufile->abeFileGetDirectoryTemp().absolutePath();
-        qDebug()<<m_fileName;
+        ABULEDU_LOG_DEBUG() << "Ouverture du fichier " << m_abuledufile->abeFileGetFileName().filePath();
+        ABULEDU_LOG_DEBUG()<<" dont le repertoire temporaire est "<<m_abuledufile->abeFileGetDirectoryTemp().absolutePath();
+        ABULEDU_LOG_DEBUG()<<m_fileName;
     }
 
     m_isNewFile = false;
@@ -596,7 +604,9 @@ void MainWindow::slotOpenFile(QSharedPointer<AbulEduFileV1> abeFile)
             QUrl Uri ( QString ( "mydata://data/%1" ).arg ( fi.fileName() ) );
             QImage image = QImageReader(fi.absoluteFilePath()).read();
             textDocument->addResource( QTextDocument::ImageResource, Uri, QVariant ( image ) );
-            if (m_localDebug) qDebug() << " ++ " << fi.absoluteFilePath() << " en tant que " << Uri;
+            if (m_localDebug) {
+                ABULEDU_LOG_DEBUG() << " ++ " << fi.absoluteFilePath() << " en tant que " << Uri;
+            }
         }
     }
     ui->teZoneTexte->update();
@@ -782,7 +792,7 @@ void MainWindow::slotChangeLangue(const QString &lang)
 {
     ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << " en "<<lang;
 
-     /* #3766 : le retranslateUi() efface tout le texte */
+    /* #3766 : le retranslateUi() efface tout le texte */
     const QString textToReplace = ui->teZoneTexte->document()->toHtml();
 
     qApp->removeTranslator(&qtTranslator);
@@ -875,7 +885,7 @@ void MainWindow::slotCurrentCharFormatChanged(QTextCharFormat tcf)
     ui->btn_italic->setChecked(tcf.fontItalic());
 
     /*  Ici gérer les changements de police et repercuter sur interface */
-    if (tcf.fontFamily() == "CursiveStandard" ){
+    if (tcf.fontFamily() == "Cursive standard" ){
         ui->btn_plume->setChecked(true);
         ui->btnCursiveMicroTexte->setChecked(true);
     }
@@ -886,8 +896,8 @@ void MainWindow::slotCurrentCharFormatChanged(QTextCharFormat tcf)
         ui->btn_seyes->setChecked(true);
     }
 
-    qDebug() << "Alignement : " <<ui->teZoneTexte->alignment();
-    qDebug() << "Color : " <<ui->teZoneTexte->textCursor().charFormat().foreground().color();
+    ABULEDU_LOG_DEBUG() << "Alignement : " <<ui->teZoneTexte->alignment();
+    ABULEDU_LOG_DEBUG() << "Color : " <<ui->teZoneTexte->textCursor().charFormat().foreground().color();
 
     /* Definition de la bonne couleur dans la comboBox suivant celle présente sous le curseur */
     int index = ui->cb_colorChooser->findData(ui->teZoneTexte->textCursor().charFormat().foreground().color());
@@ -897,16 +907,16 @@ void MainWindow::slotCurrentCharFormatChanged(QTextCharFormat tcf)
 
     /* Repercussions Majuscule/Minuscule/Cursive Microtexte */
     if(ui->teZoneTexte->textCursor().charFormat().fontCapitalization()== QFont::AllUppercase){
-        qDebug() << "Test CAPS OK";
+        ABULEDU_LOG_DEBUG() << "Test CAPS OK";
         ui->btnMajusculeMicroTexte->setChecked(true);
     }
     else if(ui->teZoneTexte->textCursor().charFormat().fontCapitalization() == QFont::AllLowercase){
-        qDebug() << "Test LOWER OK";
+        ABULEDU_LOG_DEBUG() << "Test LOWER OK";
         ui->btnMinusculeMicroTexte->setChecked(true);
     }
 
     if(/*m_textCharFormat.fontFamily() != tcf.fontFamily() && */ui->teZoneTexte->toPlainText().isEmpty()){
-        qDebug() << "+++++++++++++++++++++++++++++++   +++++++++++++++++++++++++  " << "C'est mon cas ";
+        ABULEDU_LOG_DEBUG() << "+++++++++++++++++++++++++++++++   +++++++++++++++++++++++++  " << "C'est mon cas ";
         mergeFormatOnWordOrSelection(m_textCharFormat);
         //        m_textCharFormat = tcf;
     }
@@ -914,7 +924,8 @@ void MainWindow::slotCurrentCharFormatChanged(QTextCharFormat tcf)
 
 void MainWindow::slotChangeTextAlign(const QString& align)
 {
-    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << align;
+    //flood logs
+    //    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << align;
 
     if(align == "left"){
         ui->teZoneTexte->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
@@ -932,23 +943,26 @@ void MainWindow::slotChangeTextAlign(const QString& align)
 
 void MainWindow::slotFontCaps()
 {
-//    QTextCharFormat tcf;
-//    m_textCharFormat.setFontCapitalization(QFont::AllUppercase);
-//    mergeFormatOnWordOrSelection(m_textCharFormat);
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
+    //    QTextCharFormat tcf;
+    //    m_textCharFormat.setFontCapitalization(QFont::AllUppercase);
+    //    mergeFormatOnWordOrSelection(m_textCharFormat);
     slotChangeFont("Andika");
 }
 
 void MainWindow::slotFontLower()
 {
-//    QTextCharFormat tcf;
-//    m_textCharFormat.setFontCapitalization(QFont::AllLowercase);
-//    mergeFormatOnWordOrSelection(m_textCharFormat);
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
+    //    QTextCharFormat tcf;
+    //    m_textCharFormat.setFontCapitalization(QFont::AllLowercase);
+    //    mergeFormatOnWordOrSelection(m_textCharFormat);
     slotChangeFont("Andika");
 }
 
 void MainWindow::on_teZoneTexte_textChanged()
 {
-    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ ;
+    //no debug : flood
+    //    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ ;
     if(!isWindowModified() && !ui->teZoneTexte->document()->isEmpty()) {
         setWindowModified(true);
     }
@@ -967,12 +981,14 @@ void MainWindow::slotChangeFontSize(int newSize)
 
 void MainWindow::on_btn_increase_clicked()
 {
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
     m_fontSize += 2;
     slotChangeFontSize(m_fontSize);
 }
 
 void MainWindow::on_btn_decrease_clicked()
 {
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
     m_fontSize -= 2;
     slotChangeFontSize(m_fontSize);
 }
@@ -982,23 +998,24 @@ void MainWindow::slotChangeColor(int index)
     ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__ << "On change de couleur : " << index;
     // const QStringList colorNames = QColor::colorNames();
     /* On change le fond */
-   QColor color(m_listColors.at(index));
-   QPalette palette = ui->cb_colorChooser->palette();
-   palette.setColor(QPalette::Base, color);
-   ui->cb_colorChooser->setPalette(palette);
+    QColor color(m_listColors.at(index));
+    QPalette palette = ui->cb_colorChooser->palette();
+    palette.setColor(QPalette::Base, color);
+    ui->cb_colorChooser->setPalette(palette);
 
-   /* Méthode petity carré conservée (petites icones) */
-//   int size = ui->cb_colorChooser->style()->pixelMetric(QStyle::PM_SmallIconSize);
-//   QPixmap pixmap(size, size);
-//   pixmap.fill(color);
-//   ui->cb_colorChooser->setItemData(index, pixmap, Qt::DecorationRole);
+    /* Méthode petity carré conservée (petites icones) */
+    //   int size = ui->cb_colorChooser->style()->pixelMetric(QStyle::PM_SmallIconSize);
+    //   QPixmap pixmap(size, size);
+    //   pixmap.fill(color);
+    //   ui->cb_colorChooser->setItemData(index, pixmap, Qt::DecorationRole);
 
-   QTextCharFormat fmt;
-   fmt.setForeground(color);
-   mergeFormatOnWordOrSelection(fmt);
+    QTextCharFormat fmt;
+    fmt.setForeground(color);
+    mergeFormatOnWordOrSelection(fmt);
 }
 
 void MainWindow::on_btnCursiveMicroTexte_clicked()
 {
-    slotChangeFont("CursiveStandard");
+    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
+    slotChangeFont("Cursive standard");
 }
