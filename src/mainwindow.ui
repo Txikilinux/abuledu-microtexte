@@ -826,13 +826,13 @@ p, li { white-space: pre-wrap; }
      <widget class="QFrame" name="frTopMicroTexte">
       <property name="minimumSize">
        <size>
-        <width>1024</width>
+        <width>0</width>
         <height>100</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>1024</width>
+        <width>16777215</width>
         <height>90</height>
        </size>
       </property>
@@ -1257,6 +1257,19 @@ background-color:#0D90F6;
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
     </item>
@@ -1264,8 +1277,8 @@ background-color:#0D90F6;
      <widget class="QLabel" name="lblTitreMicroTexte">
       <property name="maximumSize">
        <size>
-        <width>1024</width>
-        <height>36</height>
+        <width>16777215</width>
+        <height>40</height>
        </size>
       </property>
       <property name="styleSheet">
