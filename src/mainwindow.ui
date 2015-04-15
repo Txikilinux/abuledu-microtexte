@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1026</width>
-    <height>600</height>
+    <width>1116</width>
+    <height>686</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -254,7 +254,7 @@ p, li { white-space: pre-wrap; }
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>90</height>
+        <height>100</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -296,10 +296,7 @@ background-color:#0D90F6;
       <property name="lineWidth">
        <number>0</number>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <property name="spacing">
-        <number>0</number>
-       </property>
+      <layout class="QGridLayout" name="gridLayout_5">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -310,20 +307,83 @@ background-color:#0D90F6;
         <number>0</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>6</number>
        </property>
-       <item>
-        <widget class="QToolButton" name="btnNewMicroTexte">
+       <property name="horizontalSpacing">
+        <number>20</number>
+       </property>
+       <item row="0" column="8">
+        <widget class="QToolButton" name="btnPrintMicroTexte">
          <property name="minimumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="whatsThis">
+          <string notr="true">print</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">image: url(:/abuledutextev1/buttons/print);
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QToolButton" name="btnOpenMicroTexte">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="whatsThis">
+          <string notr="true">open</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">image: url(:/abuledutextev1/buttons/open);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QToolButton" name="btnNewMicroTexte">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="focusPolicy">
@@ -350,49 +410,18 @@ background-color:#0D90F6;
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QToolButton" name="btnOpenMicroTexte">
-         <property name="minimumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="whatsThis">
-          <string notr="true">open</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">image: url(:/abuledutextev1/buttons/open);</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
+       <item row="0" column="2">
         <widget class="QToolButton" name="btnSaveMicroTexte">
          <property name="minimumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="focusPolicy">
@@ -413,18 +442,18 @@ background-color:#0D90F6;
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QToolButton" name="btnMajusculeMicroTexte">
+       <item row="0" column="10">
+        <widget class="QToolButton" name="btnQuitMicroTexte">
          <property name="minimumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="focusPolicy">
@@ -434,73 +463,87 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string notr="true">new</string>
+          <string notr="true">quit</string>
          </property>
          <property name="styleSheet">
-          <string notr="true">image: url(:/abuledutextev1/buttons/capitale);
+          <string notr="true">image: url(:/abuledutextev1/buttons/quit);
 </string>
          </property>
          <property name="text">
           <string/>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>true</bool>
-         </property>
         </widget>
        </item>
-       <item>
-        <widget class="QToolButton" name="btnMinusculeMicroTexte">
+       <item row="0" column="7">
+        <widget class="QToolButton" name="btnIncreasePoliceMicroTexte">
          <property name="minimumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
-         <property name="toolTip">
-          <string/>
-         </property>
          <property name="whatsThis">
-          <string notr="true">new</string>
+          <string notr="true">print</string>
          </property>
          <property name="styleSheet">
-          <string notr="true">image: url(:/abuledutextev1/buttons/mini);
+          <string notr="true">image: url(:/abuledutextev1/buttons/increase);
 </string>
          </property>
          <property name="text">
           <string/>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QToolButton" name="btnDecreasePoliceMicroTexte">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
+          </size>
          </property>
-         <property name="autoExclusive">
-          <bool>true</bool>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="whatsThis">
+          <string notr="true">print</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">image: url(:/abuledutextev1/buttons/decrease);
+</string>
+         </property>
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="5">
         <widget class="QToolButton" name="btnCursiveMicroTexte">
          <property name="minimumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="focusPolicy">
@@ -530,105 +573,18 @@ background-color:#0D90F6;
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QToolButton" name="btnDecreasePoliceMicroTexte">
-         <property name="minimumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="whatsThis">
-          <string notr="true">print</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">image: url(:/abuledutextev1/buttons/decrease);
-</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="btnIncreasePoliceMicroTexte">
-         <property name="minimumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="whatsThis">
-          <string notr="true">print</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">image: url(:/abuledutextev1/buttons/increase);
-</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="btnPrintMicroTexte">
-         <property name="minimumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>78</width>
-           <height>78</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="whatsThis">
-          <string notr="true">print</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">image: url(:/abuledutextev1/buttons/print);
-</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
+       <item row="0" column="9">
         <widget class="QToolButton" name="btnHelpMicroTexte">
          <property name="minimumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="focusPolicy">
@@ -646,18 +602,18 @@ background-color:#0D90F6;
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QToolButton" name="btnQuitMicroTexte">
+       <item row="0" column="3">
+        <widget class="QToolButton" name="btnMajusculeMicroTexte">
          <property name="minimumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>78</width>
-           <height>78</height>
+           <width>72</width>
+           <height>72</height>
           </size>
          </property>
          <property name="focusPolicy">
@@ -667,18 +623,62 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string notr="true">quit</string>
+          <string notr="true">new</string>
          </property>
          <property name="styleSheet">
-          <string notr="true">image: url(:/abuledutextev1/buttons/quit);
+          <string notr="true">image: url(:/abuledutextev1/buttons/capitale);
 </string>
          </property>
          <property name="text">
           <string/>
          </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="4">
+        <widget class="QToolButton" name="btnMinusculeMicroTexte">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="whatsThis">
+          <string notr="true">new</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">image: url(:/abuledutextev1/buttons/mini);
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="11">
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -690,6 +690,215 @@ background-color:#0D90F6;
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Nouveau</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_11">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Ouverture</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_10">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Sauvegarde</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_9">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Majuscule</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Minuscule</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QLabel" name="label_8">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Cursive</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="6">
+        <widget class="QLabel" name="label_7">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Rétréci</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Agrandi</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Impression</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="9">
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Aide</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="10">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>Andika Basic</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#0a73f4;</string>
+         </property>
+         <property name="text">
+          <string>Sortie</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
