@@ -47,7 +47,7 @@
     <property name="spacing">
      <number>0</number>
     </property>
-    <item row="4" column="0">
+    <item row="3" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -75,567 +75,7 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <item row="0" column="0" colspan="3">
-         <widget class="QFrame" name="frmFormat">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>48</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>48</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color:#0D90F6</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QToolButton" name="btn_bold">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="text">
-              <string notr="true"/>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/abuledutextev1/format/bold</normaloff>:/abuledutextev1/format/bold</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>48</width>
-               <height>48</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="autoRaise">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="btn_italic">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="text">
-              <string notr="true"/>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/abuledutextev1/format/italic</normaloff>:/abuledutextev1/format/italic</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>48</width>
-               <height>48</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="autoRaise">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="btn_underlined">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="text">
-              <string notr="true"/>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/abuledutextev1/format/underlined</normaloff>:/abuledutextev1/format/underlined</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>48</width>
-               <height>48</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="autoRaise">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="btn_decrease">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="text">
-              <string notr="true"/>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/abuledutextev1/format/decrease</normaloff>:/abuledutextev1/format/decrease</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>48</width>
-               <height>48</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-             <property name="autoRaise">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="btn_increase">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="text">
-              <string notr="true"/>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/abuledutextev1/format/increase</normaloff>:/abuledutextev1/format/increase</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>48</width>
-               <height>48</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-             <property name="autoRaise">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frameAlignement">
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QToolButton" name="btn_leftText">
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/abuledutextev1/format/left</normaloff>:/abuledutextev1/format/left</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>48</width>
-                  <height>48</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="autoExclusive">
-                 <bool>true</bool>
-                </property>
-                <property name="autoRaise">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btn_centerText">
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/abuledutextev1/format/center</normaloff>:/abuledutextev1/format/center</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>48</width>
-                  <height>48</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="autoExclusive">
-                 <bool>true</bool>
-                </property>
-                <property name="autoRaise">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btn_rightText">
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/abuledutextev1/format/right</normaloff>:/abuledutextev1/format/right</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>48</width>
-                  <height>48</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="autoExclusive">
-                 <bool>true</bool>
-                </property>
-                <property name="autoRaise">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btn_justifyText">
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/abuledutextev1/format/justify</normaloff>:/abuledutextev1/format/justify</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>48</width>
-                  <height>48</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="autoExclusive">
-                 <bool>true</bool>
-                </property>
-                <property name="autoRaise">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_2">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frameFont">
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QToolButton" name="btn_andika">
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/abuledutextev1/format/fontAndika</normaloff>:/abuledutextev1/format/fontAndika</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>48</width>
-                  <height>48</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="autoExclusive">
-                 <bool>true</bool>
-                </property>
-                <property name="autoRaise">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btn_seyes">
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/abuledutextev1/format/fontSeyes</normaloff>:/abuledutextev1/format/fontSeyes</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>48</width>
-                  <height>48</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="autoExclusive">
-                 <bool>true</bool>
-                </property>
-                <property name="autoRaise">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btn_plume">
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/abuledutextev1/format/fontCursive</normaloff>:/abuledutextev1/format/fontCursive</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>48</width>
-                  <height>48</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="autoExclusive">
-                 <bool>true</bool>
-                </property>
-                <property name="autoRaise">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_3">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cb_colorChooser">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>56</width>
-               <height>48</height>
-              </size>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
-             </property>
-             <property name="minimumContentsLength">
-              <number>16</number>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>48</width>
-               <height>48</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="btn_data">
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="text">
-              <string notr="true"/>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/abuledutextev1/buttons/data</normaloff>:/abuledutextev1/buttons/data</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>48</width>
-               <height>48</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-             <property name="autoExclusive">
-              <bool>false</bool>
-             </property>
-             <property name="autoRaise">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-          <zorder>btn_bold</zorder>
-          <zorder>btn_italic</zorder>
-          <zorder>btn_underlined</zorder>
-          <zorder>btn_decrease</zorder>
-          <zorder>btn_increase</zorder>
-          <zorder>line</zorder>
-          <zorder>line_2</zorder>
-          <zorder>frameFont</zorder>
-          <zorder>frameAlignement</zorder>
-          <zorder>line_3</zorder>
-          <zorder>btn_data</zorder>
-          <zorder>horizontalSpacer</zorder>
-          <zorder>cb_colorChooser</zorder>
-         </widget>
-        </item>
-        <item row="1" column="0">
+        <item row="0" column="0">
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -651,7 +91,7 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="1" rowspan="2">
+        <item row="0" column="1" rowspan="2">
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QTextEdit" name="teZoneTexte">
@@ -687,7 +127,7 @@ font: 30pt &quot;Andika&quot;;</string>
              <set>QTextEdit::AutoNone</set>
             </property>
             <property name="html">
-             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+             <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Andika'; font-size:30pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -716,7 +156,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="2" column="2">
+        <item row="1" column="2">
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -801,25 +241,6 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
       <widget class="AbulEduAproposV1" name="pageAbout"/>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="AbulEduMenuFeuilleV1" name="frmMenuFeuille">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>48</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:#0D90F6</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
      </widget>
     </item>
     <item row="1" column="0">
@@ -912,7 +333,7 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string>new</string>
+          <string notr="true">new</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/new); 
@@ -950,7 +371,7 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string>open</string>
+          <string notr="true">open</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/open);</string>
@@ -981,7 +402,7 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string>save</string>
+          <string notr="true">save</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/save);
@@ -1013,7 +434,7 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string>new</string>
+          <string notr="true">new</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/capitale);
@@ -1051,7 +472,7 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string>new</string>
+          <string notr="true">new</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/mini);
@@ -1089,7 +510,7 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/manuscrit);
@@ -1127,7 +548,7 @@ background-color:#0D90F6;
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="whatsThis">
-          <string>print</string>
+          <string notr="true">print</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/decrease);
@@ -1156,7 +577,7 @@ background-color:#0D90F6;
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="whatsThis">
-          <string>print</string>
+          <string notr="true">print</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/increase);
@@ -1185,7 +606,7 @@ background-color:#0D90F6;
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="whatsThis">
-          <string>print</string>
+          <string notr="true">print</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/print);
@@ -1214,7 +635,7 @@ background-color:#0D90F6;
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="whatsThis">
-          <string>help</string>
+          <string notr="true">help</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/help);
@@ -1246,7 +667,7 @@ background-color:#0D90F6;
           <string/>
          </property>
          <property name="whatsThis">
-          <string>quit</string>
+          <string notr="true">quit</string>
          </property>
          <property name="styleSheet">
           <string notr="true">image: url(:/abuledutextev1/buttons/quit);
@@ -1313,20 +734,12 @@ font-size:24px;
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>AbulEduMenuFeuilleV1</class>
-   <extends>QFrame</extends>
-   <header>abuledumenufeuillev1.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>AbulEduAproposV1</class>
    <extends>QWidget</extends>
    <header>abuleduaproposv1.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

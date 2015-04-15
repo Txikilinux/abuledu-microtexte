@@ -103,11 +103,6 @@ public:
       */
     void abeTexteSetUnderline(bool onOff);
 
-    /** insére une image à l'endroit du curseur
-      * @param cheminImage Le chemin vers l'image à insérer
-      */
-    bool abeTexteInsertImage(const QString &cheminImage, qreal width = 0, qreal height = 0, const QTextFrameFormat::Position &position = QTextFrameFormat::InFlow, QString name = "");
-
 private:
     Ui::MainWindow *ui;
 
@@ -130,7 +125,6 @@ private:
     /** Le chemin du fichier */
     QString m_fileName;
 
-    bool m_localDebug;
     int m_hauteurToolBar;
 
     bool m_isNewFile; //pour savoir si le fichier actuel est un nouveau fichier ou pas ...
@@ -156,13 +150,10 @@ private:
 
     QSignalMapper *m_signalMapperFontChange;
     QSignalMapper *m_signalMapperFontFormChange;
-    QSignalMapper *m_signalMapperTextAlignChange;
 
     int m_fontSize;
 
     QTextCharFormat m_textCharFormat;
-
-    QStringList m_listColors;
 
     QString m_textToSpeech;
 
@@ -170,9 +161,6 @@ private:
     void initMultimedia();
     void initSignalMapperFontChange();
     void initSignalMapperFormFontChange();
-    void initSignalMapperTextAlignChange();
-    void initComboBoxColor(QComboBox *cb);
-    void initTooltips();
 
 public slots:
 
@@ -185,10 +173,6 @@ public slots:
 #ifndef QT_NO_PRINTER
     void filePrint(QPrinter*);
 #endif
-
-    void slotCursorMoved();
-    /** Mets à jour l'état des boutons de la tool barre en fonction du formatage */
-//    void updateActions(QTextCharFormat fmt);
 
     void slotMediathequeDownload(QSharedPointer<AbulEduFileV1> abeFile, int code);
 
@@ -214,8 +198,6 @@ private slots:
     void on_stackedWidget_currentChanged(int arg1);
     void slotClearCurrent();
 
-    void slotChangeColor(int);
-
     void showAbeMediathequeGet();
     void showTextPage();
 
@@ -229,7 +211,6 @@ private slots:
     void slotChangeFormFont(const QString &);
     void slotChangeFontSize(int );
     void slotCurrentCharFormatChanged(QTextCharFormat);
-    void slotChangeTextAlign(const QString &);
     void slotFontCaps();
     void slotFontLower();
 
