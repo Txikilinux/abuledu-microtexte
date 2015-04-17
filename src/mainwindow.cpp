@@ -308,13 +308,13 @@ void MainWindow::closeEvent(QCloseEvent *e)
         msg->abeSetModeEnum(AbulEduMessageBoxV1::abeYesNoCancelButton);
         /* Je commente le code ci-dessous tant que je n'ai pas pushé la modif dans la lib AbulEduMessageBoxV1 */
 
-//        /* Normalement, et jusqu'à qu'on ait décidé où mettre le fichier ogg, le code ci-dessous, parce qu'il ne trouvera pas le ogg, devrait provoquer la synthèse vocale */
-//        QString soundPath = QString();
+        /* Normalement, et jusqu'à qu'on ait décidé où mettre le fichier ogg, le code ci-dessous, parce qu'il ne trouvera pas le ogg, devrait provoquer la synthèse vocale */
+        QString soundPath = QString();
 //        if(QFile(abeApp->applicationDirPath() + "/data/sons/confirmationFermeture.ogg").exists()){
 //            soundPath = abeApp->applicationDirPath() + "/data/sons/confirmationFermeture.ogg";
 //        }
-//        ABULEDU_LOG_DEBUG()<<soundPath;
-//        msg->abeMessageBoxSetMultimedia(soundPath);
+        ABULEDU_LOG_DEBUG()<<soundPath;
+        msg->abeMessageBoxSetMultimedia(soundPath);
         msg->show();
         connect(msg,SIGNAL(signalAbeMessageBoxYES()),SLOT(on_abeMenuFeuilleBtnSave_clicked()),Qt::UniqueConnection);
         connect(msg,SIGNAL(signalAbeMessageBoxNO()),SLOT(deleteLater()),Qt::UniqueConnection);
@@ -599,13 +599,13 @@ void MainWindow::on_abeMenuFeuilleBtnNew_clicked()
         msg->abeSetModeEnum(AbulEduMessageBoxV1::abeYesNoCancelButton);
         /* Je commente le code ci-dessous tant que je n'ai pas pushé la modif dans la lib AbulEduMessageBoxV1 */
 
-//        /* Normalement, et jusqu'à qu'on ait décidé où mettre le fichier ogg, le code ci-dessous, parce qu'il ne trouvera pas le ogg, devrait provoquer la synthèse vocale */
-//        QString soundPath = QString();
-//        if(QFile(abeApp->applicationDirPath() + "/data/sons/confirmationFermeture.ogg").exists()){
-//            soundPath = abeApp->applicationDirPath() + "/data/sons/confirmationFermeture.ogg";
-//        }
-//        ABULEDU_LOG_DEBUG()<<soundPath;
-//        msg->abeMessageBoxSetMultimedia(soundPath);
+        /* Normalement, et jusqu'à qu'on ait décidé où mettre le fichier ogg, le code ci-dessous, parce qu'il ne trouvera pas le ogg, devrait provoquer la synthèse vocale */
+        QString soundPath = QString();
+        if(QFile(abeApp->applicationDirPath() + "/data/sons/confirmationFermeture.ogg").exists()){
+            soundPath = abeApp->applicationDirPath() + "/data/sons/confirmationFermeture.ogg";
+        }
+        ABULEDU_LOG_DEBUG()<<soundPath;
+        msg->abeMessageBoxSetMultimedia(soundPath);
         msg->show();
         connect(msg,SIGNAL(signalAbeMessageBoxYES()),SLOT(on_abeMenuFeuilleBtnSave_clicked()),Qt::UniqueConnection);
         connect(msg,SIGNAL(signalAbeMessageBoxNO()),SLOT(slotClearCurrent()),Qt::UniqueConnection);    }
