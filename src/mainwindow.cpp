@@ -164,8 +164,10 @@ void MainWindow::initMultimedia()
     ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_multimedia = new AbulEduMultiMediaV1(AbulEduMultiMediaV1::Sound, ui->frmControlAudio);
-    m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioSetDirection(QBoxLayout::TopToBottom);
+    m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioSetSpeedControlVisible(true);
+    m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioGetVitesseLabel()->setStyleSheet("color:#0a73f4");
     m_multimedia->abeMultiMediaSetButtonVisible(AbulEduMultiMediaV1::BtnMagnifyingGlass | AbulEduMultiMediaV1::BtnPrevious | AbulEduMultiMediaV1::BtnNext | AbulEduMultiMediaV1::BtnHide | AbulEduMultiMediaV1::BtnRecord,false);
+    m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioSetDirection(QBoxLayout::TopToBottom);
     m_multimedia->abeMultiMediaForceStop();
     m_multimedia->abeMultiMediaSetTextVisible(false);
     connect(m_multimedia->abeMultiMediaGetAudioControlWidget(), SIGNAL(signalAbeControlAudioPlayClicked()),this, SLOT(slotReadContent()),Qt::UniqueConnection);
