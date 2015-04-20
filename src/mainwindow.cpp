@@ -165,7 +165,7 @@ void MainWindow::initMultimedia()
 
     m_multimedia = new AbulEduMultiMediaV1(AbulEduMultiMediaV1::Sound, ui->frmControlAudio);
     m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioSetSpeedControlVisible(true);
-    m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioGetVitesseLabel()->setStyleSheet("color:#0a73f4");
+    m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioGetFrameSpeed()->setStyleSheet("color:#0a73f4;");
     m_multimedia->abeMultiMediaSetButtonVisible(AbulEduMultiMediaV1::BtnMagnifyingGlass | AbulEduMultiMediaV1::BtnPrevious | AbulEduMultiMediaV1::BtnNext | AbulEduMultiMediaV1::BtnHide | AbulEduMultiMediaV1::BtnRecord,false);
     m_multimedia->abeMultiMediaGetAudioControlWidget()->abeControlAudioSetDirection(QBoxLayout::TopToBottom);
     m_multimedia->abeMultiMediaForceStop();
