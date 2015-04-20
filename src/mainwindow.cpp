@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     case QSysInfo::WV_VISTA: ABULEDU_LOG_DEBUG()<< "Windows Vista";break;
     case QSysInfo::WV_WINDOWS7: ABULEDU_LOG_DEBUG()<< "Windows Seven";break;
     case QSysInfo::WV_WINDOWS8: ABULEDU_LOG_DEBUG()<< "Windows 8";break;
-    default: ABULEDU_LOG_DEBUG<< "Windows";break;
+    default: ABULEDU_LOG_DEBUG()<< "Windows";break;
     }
 #endif
 
