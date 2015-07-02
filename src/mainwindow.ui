@@ -326,6 +326,9 @@ background-color:#0D90F6;
            <height>72</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
@@ -354,6 +357,9 @@ background-color:#0D90F6;
            <width>72</width>
            <height>72</height>
           </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
@@ -385,6 +391,9 @@ background-color:#0D90F6;
            <width>72</width>
            <height>72</height>
           </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
@@ -424,6 +433,9 @@ background-color:#0D90F6;
            <height>72</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
@@ -455,6 +467,9 @@ background-color:#0D90F6;
            <width>72</width>
            <height>72</height>
           </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
@@ -488,6 +503,9 @@ background-color:#0D90F6;
            <height>72</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
@@ -517,6 +535,9 @@ background-color:#0D90F6;
            <height>72</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
@@ -545,6 +566,9 @@ background-color:#0D90F6;
            <width>72</width>
            <height>72</height>
           </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
@@ -587,6 +611,9 @@ background-color:#0D90F6;
            <height>72</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
@@ -615,6 +642,9 @@ background-color:#0D90F6;
            <width>72</width>
            <height>72</height>
           </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
@@ -653,6 +683,9 @@ background-color:#0D90F6;
            <width>72</width>
            <height>72</height>
           </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
