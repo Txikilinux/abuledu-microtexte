@@ -157,7 +157,6 @@ private:
 
     QString m_textToSpeech;
 
-    void centrerFenetre();
     void initMultimedia();
     void initSignalMapperFontChange();
     void initSignalMapperFormFontChange();

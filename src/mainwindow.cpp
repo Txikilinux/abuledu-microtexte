@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_isNewFile         = true;
     m_wantNewFile       = false;
     m_wantOpenFile      = false;
-    setWindowFlags(Qt::CustomizeWindowHint);
+    setWindowFlags(Qt::FramelessWindowHint);
 
 #ifdef Q_OS_WIN
     switch(QSysInfo::windowsVersion())
@@ -113,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 #ifndef __ABULEDUTABLETTEV1__MODE__
     /* On Centre la fenetre */
-    centrerFenetre();
+    abeApp->abeCenterWindow(this);
     ui->teZoneTexte->setFocus();
 #endif
 
@@ -147,16 +147,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->btnMajusculeMicroTexte->click();
 
     setWindowModified(false);
-}
-
-void MainWindow::centrerFenetre()
-{
-    ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
-
-    QDesktopWidget *widget = QApplication::desktop();
-    int desktop_width  = widget->screen(widget->screenNumber(this))->width();
-    int desktop_height = widget->screen(widget->screenNumber(this))->height();
-    this->move((desktop_width-this->width())/2, (desktop_height-this->height())/2);
 }
 
 void MainWindow::initMultimedia()
