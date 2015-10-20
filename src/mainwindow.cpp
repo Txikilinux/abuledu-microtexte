@@ -1,7 +1,7 @@
- /** MiniTexte pour Tablette
+ /** MicroTexte pour Tablette
   *
   * @warning aucun traitement d'erreur n'est pour l'instant implémenté
-  * @see https://redmine.ryxeo.com/projects/abuledu-minitexte
+  * @see https://redmine.ryxeo.com/projects/abuledu-microtexte
   * @author 2011 Jean-Louis Frucot <frucot.jeanlouis@free.fr>
   * @author 2012-2014 Eric Seigne <eric.seigne@ryxeo.com>
   * @author 2013-2014 Philippe Cadaugade <philippe.cadaugade@ryxeo.com>
@@ -189,7 +189,7 @@ void MainWindow::installTranslator()
     ABULEDU_LOG_DEBUG() << __PRETTY_FUNCTION__;
 
     m_locale = QLocale::system().name().section('_', 0, 0);
-    myappTranslator.load("abuledu-minitexte_"+m_locale, "./lang");
+    myappTranslator.load("abuledu-microtexte_"+m_locale, "./lang");
     abeApp->installTranslator(&myappTranslator);
     /* pour avoir les boutons des boîtes de dialogue dans la langue locale (fr par défaut) */
     qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
@@ -634,7 +634,7 @@ void MainWindow::slotChangeLangue(const QString &lang)
 
     qtTranslator.load("qt_" + lang, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     qApp->installTranslator(&qtTranslator);
-    myappTranslator.load("abuledu-minitexte_" + lang, "lang");
+    myappTranslator.load("abuledu-microtexte_" + lang, "lang");
     qApp->installTranslator(&myappTranslator);
     ui->retranslateUi(this);
 
